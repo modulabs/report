@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODULABS AI TREND REPORT 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            --primary: #4338CA;
+            --primary-light: #6366F1;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #1F2937;
+            --gray: #6B7280;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+            --gradient-cover: linear-gradient(135deg, #4338CA 0%, #6366F1 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            /* Reduced radius for more professional/compact look */
+            --radius: 8px;
+            /* Was 12px */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: #E5E7EB;
+            color: var(--dark);
+            line-height: 1.5;
+            /* Slightly tighter line height */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 18mm;
+            margin: 20px auto;
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            background: var(--gradient-cover);
+            color: var(--white);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            /* Reduced */
+            opacity: 0.9;
+        }
+
+        .cover-title-wrap {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            /* Reduced */
+            backdrop-filter: blur(10px);
+            margin-bottom: 50px;
+            /* Reduced */
+        }
+
+        .cover-title {
+            font-size: 56px;
+            /* Reduced from 64px */
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .cover-subtitle {
+            font-size: 20px;
+            /* Reduced from 24px */
+            font-weight: 300;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        .cover-stats-row {
+            display: flex;
+            gap: 40px;
+            /* Reduced from 60px */
+            margin-top: 30px;
+            /* Reduced from 40px */
+        }
+
+        .cover-stat-item {
+            text-align: center;
+        }
+
+        .cover-stat-num {
+            font-size: 48px;
+            /* Reduced from 56px */
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .cover-stat-desc {
+            font-size: 14px;
+            /* Reduced from 16px */
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .cover-footer {
+            position: absolute;
+            bottom: 15mm;
+            font-size: 14px;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* Standard Layout */
+        .header {
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+
+        .header-title h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        .header-tag {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .header-desc {
+            font-size: 14px;
+            color: var(--gray);
+            max-width: 50%;
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        /* Cards & Content */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .card-grid-3 .card {
+            padding: 14px;
+        }
+
+        .card-grid-3 .card-title {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--light);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card.highlight {
+            background: linear-gradient(135deg, #EEF2FF 0%, #FFFFFF 100%);
+            border-color: #E0E7FF;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Typography */
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 25px 0 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+
+        h3::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 20px;
+            background: var(--primary);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #4B5563;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 180px;
+            width: 100%;
+        }
+
+        .chart-container.small {
+            height: 120px;
+        }
+
+        .chart-container.tall {
+            height: 260px;
+        }
+
+        /* Status Bar / Progress */
+        .progress-item {
+            margin-bottom: 14px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .progress-fill.secondary {
+            background: var(--secondary);
+        }
+
+        .progress-fill.accent {
+            background: var(--accent);
+        }
+
+        /* Key Insight Box */
+        .insight-box {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin-top: 20px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .insight-icon {
+            font-size: 22px;
+        }
+
+        .insight-content h4 {
+            color: #15803D;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .insight-content p {
+            font-size: 14px;
+            color: #166534;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Ranking List */
+        .rank-list {
+            list-style: none;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        .rank-num.silver {
+            background: #9CA3AF;
+        }
+
+        .rank-num.bronze {
+            background: #B45309;
+        }
+
+        .rank-text {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .rank-val {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--light);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        /* Analysis Box (New in v2.1 - Optimized) */
+        .analysis-box {
+            background-color: #F8FAFC;
+            border-left: 4px solid #6366F1;
+            padding: 16px 18px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+
+        .analysis-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #4338CA;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .analysis-title::before {
+            content: '📊';
+            font-size: 14px;
+        }
+
+        .analysis-text {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.7;
+            text-align: justify;
+            margin-bottom: 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .page {
+                margin: 0;
+                padding: 15mm 18mm;
+                box-shadow: none;
+                page-break-after: always;
+                width: 210mm;
+                min-height: 297mm;
+            }
+
+            .page.cover {
+                padding: 0;
+            }
+        }
+
+        /* Full Bleed for Cover Image */
+        .page.cover {
+            padding: 0;
+        }
+
+        .page.cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover">
+        <img src="A4 - 1.png" alt="MODULABS 2025 AI TREND REPORT COVER">
+    </div>
+
+    <!-- EXECUTIVE SUMMARY -->
+    <div class="page">
+        <div class="header">
+            <div class="header-title">
+                <span class="header-tag">EXECUTIVE SUMMARY</span>
+                <h2>2025 AI 트렌드 핵심 요약</h2>
+            </div>
+            <p class="header-desc">2,000명 이상의 AI 커뮤니티 구성원이<br>말하는 2025년 AI 생태계</p>
+        </div>
+
+        <div class="card highlight" style="margin-bottom: 25px;">
+            <p style="font-size: 16px; font-weight: 500; color: var(--dark); margin: 0; line-height: 1.7;">
+                본 리포트는 2025년을 치열하게 보낸 모두콘 신청자 <strong>2,133명</strong>의 목소리를 담았습니다.
+                2025년은 '생성형 AI의 일상화'를 넘어 <strong>'AI Agent를 통한 업무 자동화의 원년'</strong>으로 기록되었습니다.
+            </p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🚀 생성형 AI의 '일상화'</div>
+                <p style="margin:0;">전체 응답자의 <strong>91%</strong>가 주 3회 이상 생성형 AI를 사용합니다. 단순 호기심 단계를 지나, 비즈니스 필수 도구로 완전히
+                    자리잡았습니다.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🤖 'AI Agent'의 급부상</div>
+                <p style="margin:0;">LLM(80%)에 이어 <strong>AI Agent(53%)</strong>가 관심 기술 2위를 차지했습니다. 자율적으로 판단하고 실행하는 AI에
+                    대한 기대감이 폭발적입니다.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">💼 '실무 적용'에 목마르다</div>
+                <p style="margin:0;">가장 관심 있는 트랙은 <strong>'AI to Reality'</strong>입니다. 이론적 학습보다는 실제 서비스를 만들고 성과를 내는 구체적
+                    방법에 집중하고 있습니다.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🤝 함께 성장하는 '커뮤니티'</div>
+                <p style="margin:0;">참여자의 <strong>58%</strong>가 최신 트렌드 파악을, <strong>47%</strong>가 타 분야와 융합(AI+X)을 원합니다.
+                    홀로 성장하기보다 연결을 통한 확장을 지향합니다.</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-icon">💡</div>
+            <div class="insight-content">
+                <h4>Insight: From Tool to Partner</h4>
+                <p>AI는 더 이상 단순한 '검색 도구'가 아닙니다. 2025년은 사용자의 의도를 파악하고 복잡한 업무를 대신 수행하는 <strong>'동료(Partner)'</strong>로서의
+                    AI를 받아들이는 해가 될 것입니다. 이에 따라 <strong>신뢰성 검증</strong> 역량이 그 어느 때보다 중요해졌습니다.</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MODULABS 2025 AI TREND REPORT</span>
+            <span>02</span>
+        </div>
+    </div>
+
+    <!-- PART 1 & 2: PROFILE & TECH -->
+    <div class="page">
+        <div class="header">
+            <div class="header-title">
+                <span class="header-tag">PART 1 & 2</span>
+                <h2>응답자 프로필 & 기술 트렌드</h2>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 16px;">
+            <div class="card-title">연령대 분포</div>
+            <div class="chart-container">
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">소속 유형</div>
+                <div class="chart-container">
+                    <canvas id="jobChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">직무 분야</div>
+                <div class="chart-container">
+                    <canvas id="fieldChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : AI의 대중화가 완성된 2025년</span>
+            <p class="analysis-text">
+                2025년의 가장 큰 특징은 <strong>'사용자층의 탈(脫)개발자화'</strong>입니다. 과거 IT/SW 직군(56%)에 집중되었던 관심이 제조, 금융, 교육 등 전 산업 분야로
+                넓게 퍼졌습니다. 특히 4050 세대의 참여율이 30%를 넘어서며, AI가 특정 계층의 전유물이 아닌 <strong>'전 국민의 디지털 리터러시'</strong>로 자리 잡았음을
+                보여줍니다. 이는 기업의 DX(디지털 전환)가 개인 차원까지 깊숙이 침투했음을 의미합니다.
+            </p>
+        </div>
+
+        <h3>🔥 2025년 가장 주목하는 AI 기술 (TOP 10)</h3>
+        <div class="card">
+            <div class="chart-container tall">
+                <canvas id="techChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card-grid" style="margin-top: 20px;">
+            <div class="card highlight">
+                <div class="card-title">Gen AI & LLM (80.4%)</div>
+                <p style="margin:0;">압도적 1위입니다. 모든 AI 서비스의 기반 기술로서 여전히 가장 큰 영향력을 발휘하고 있습니다.</p>
+            </div>
+            <div class="card highlight">
+                <div class="card-title">AI Agent (53.0%)</div>
+                <p style="margin:0;">작년 대비 가장 큰 폭으로 상승했습니다. LLM을 활용한 서비스 구현의 핵심 키워드입니다.</p>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : '대화'를 넘어 '행동'으로 (The Year of Agent)</span>
+            <p class="analysis-text">
+                2024년이 '대화형 AI(Chat)'의 해였다면, <strong>2025년은 명백히 '에이전트(Agent)'의 해</strong>였습니다. LLM(80.4%)은 이제 공기처럼 당연한
+                인프라가 되었고, 실제 시장의 관심은 이를 활용해 자율적으로 과업을 수행하는 <strong>AI Agent(53%)</strong>로 이동했습니다. 이는 사용자들이 더 이상 '답변'을
+                듣는 것에 만족하지 않고, '업무를 대신 처리'해주는 실질적인 효용을 요구하기 시작했음을 시사합니다.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>MODULABS 2025 AI TREND REPORT</span>
+            <span>03</span>
+        </div>
+    </div>
+
+    <!-- PART 3: USAGE -->
+    <div class="page">
+        <div class="header">
+            <div class="header-title">
+                <span class="header-tag">PART 3</span>
+                <h2>생성형 AI 활용 현황</h2>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">업무 활용 빈도</div>
+                <div class="chart-container">
+                    <canvas id="freqChart"></canvas>
+                </div>
+                <p
+                    style="text-align: center; margin-top: 15px; margin-bottom: 0; font-size: 16px; font-weight: 700; color: var(--primary);">
+                    "매일 쓴다" 73%</p>
+            </div>
+            <div class="card">
+                <div class="card-title">가장 많이 쓰는 서비스 TOP 5</div>
+                <ul class="rank-list">
+                    <li class="rank-item">
+                        <span class="rank-num">1</span>
+                        <span class="rank-text">ChatGPT</span>
+                        <span class="rank-val">99%</span>
+                    </li>
+                    <li class="rank-item">
+                        <span class="rank-num silver">2</span>
+                        <span class="rank-text">Gemini</span>
+                        <span class="rank-val">91%</span>
+                    </li>
+                    <li class="rank-item">
+                        <span class="rank-num bronze">3</span>
+                        <span class="rank-text">Claude</span>
+                        <span class="rank-val">74%</span>
+                    </li>
+                    <li class="rank-item">
+                        <span class="rank-num" style="background:var(--light); color:var(--dark)">4</span>
+                        <span class="rank-text">Perplexity</span>
+                        <span class="rank-val">68%</span>
+                    </li>
+                    <li class="rank-item">
+                        <span class="rank-num" style="background:var(--light); color:var(--dark)">5</span>
+                        <span class="rank-text">MS Copilot</span>
+                        <span class="rank-val">56%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : 유틸리티(Utility)가 된 AI</span>
+            <p class="analysis-text">
+                <strong>'매일 사용(73%)'</strong>이라는 수치는 놀랍습니다. 이는 AI가 인터넷 검색이나 메신저처럼 완전히 <strong>'생활 유틸리티'</strong> 단계에
+                진입했음을
+                증명합니다. 서비스 측면에서는 ChatGPT의 독주(99%) 속에 Claude와 Perplexity가 '검색'과 '코딩'이라는 특화 기능을 무기로 견고한 2, 3위권을 형성하며
+                <strong>'목적형 멀티 LLM 활용'</strong> 패턴이 정착된 한 해였습니다.
+            </p>
+        </div>
+
+        <h3>주요 활용 목적</h3>
+        <div class="card">
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>기획 및 아이디에이션</span>
+                    <span>77.0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 77%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>정보 검색 및 리서치</span>
+                    <span>71.0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill secondary" style="width: 71%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>문서 작성 (보고서/메일)</span>
+                    <span>64.1%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill accent" style="width: 64%"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>전략 수립 및 분석</span>
+                    <span>42.4%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 42%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : 기획자(Planner)로서의 AI</span>
+            <p class="analysis-text">
+                흥미로운 점은 AI 활용의 주 목적이 <strong>'기획 및 아이디에이션(77%)'</strong>이라는 점입니다. 이는 인간이 AI를 단순 반복 작업의 도구가 아닌,
+                <strong>'창의적
+                    파트너(Co-pilot)'</strong>로 인정했다는 강력한 증거입니다. 2025년, 우리는 AI에게 '정답'을 묻기보다 '가능성'을 묻고 있습니다.
+            </p>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-icon">🚧</div>
+            <div class="insight-content">
+                <h4>Pain Point: 결과의 신뢰성</h4>
+                <p>활용 확산의 가장 큰 걸림돌은 <strong>'결과 신뢰성 판단(63.5%)'</strong>입니다. 이는 단순한 툴 사용법 교육을 넘어, 결과를 비판적으로 검증하고 수정할 수 있는
+                    고차원적인 AI 리터러시 역량이 필요함을 시사합니다.</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MODULABS 2025 AI TREND REPORT</span>
+            <span>04</span>
+        </div>
+    </div>
+
+    <!-- PART 4: EDUCATION & NEEDS (NEW) -->
+    <div class="page">
+        <div class="header">
+            <div class="header-title">
+                <span class="header-tag">PART 4</span>
+                <h2>성장과 교육 니즈 (Needs)</h2>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">가장 배우고 싶은 주제 TOP 5</div>
+                <div class="chart-container">
+                    <canvas id="eduChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">왜 배우고 싶은가? (참여 목적)</div>
+                <div class="progress-item" style="margin-top: 15px;">
+                    <div class="progress-header"><span>최신 트렌드 파악</span><span>58%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 58%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header"><span>개인적 성장</span><span>39%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill secondary" style="width: 39%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header"><span>실무 기술 습득</span><span>38%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill accent" style="width: 38%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header"><span>네트워킹</span><span>20%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="background:#8B5CF6; width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : '채팅'을 넘어 '엔지니어링'으로</span>
+            <p class="analysis-text">
+                사람들은 이제 단순히 챗봇과 대화하는 법을 배우고 싶어 하지 않습니다. <strong>'업무 자동화(Automation)'</strong>와 <strong>'데이터
+                    분석'</strong>에 대한 폭발적인 교육 니즈는, 사용자들이 AI를 이용해 <strong>'나만의 워크플로우'</strong>를 구축하고 싶어 한다는 것을 보여줍니다.
+                2025년의 교육 트렌드는 '사용법(How to use)'에서 <strong>'구축법(How to build)'</strong>으로 완전히 전환되었습니다.
+            </p>
+        </div>
+
+        <h3>교육 니즈 상세 분석</h3>
+        <div class="card-grid card-grid-3">
+            <div class="card highlight">
+                <div class="card-title">🧩 프롬프트 & 활용</div>
+                <p style="margin:0;">ChatGPT 심화 기능, 프롬프트 엔지니어링 등 도구를 100% 활용하는 방법에 대한 수요가 가장 높습니다. (656건)</p>
+            </div>
+            <div class="card highlight">
+                <div class="card-title">⚡️ 업무 자동화</div>
+                <p style="margin:0;">Python, 노션, n8n 등을 연동하여 반복 업무를 자동화하려는 실질적 니즈가 강합니다. (537건)</p>
+            </div>
+            <div class="card highlight">
+                <div class="card-title">📊 데이터 분석</div>
+                <p style="margin:0;">Excel을 넘어서 AI를 활용한 데이터 처리 및 시각화 역량을 기르고자 합니다. (495건)</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>MODULABS 2025 AI TREND REPORT</span>
+            <span>05</span>
+        </div>
+    </div>
+
+    <!-- PART 5: COMMUNITY -->
+    <div class="page">
+        <div class="header">
+            <div class="header-title">
+                <span class="header-tag">PART 5</span>
+                <h2>커뮤니티와 연결</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">어떤 활동을 함께하고 싶은가?</div>
+            <div class="chart-container tall">
+                <canvas id="communityChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card-grid" style="margin-top: 20px;">
+            <div class="card">
+                <div class="card-title">함께 성장하는 문화</div>
+                <p style="margin:0;">모두의연구소 인지도는 매우 높으며(60% 이상), 주요 유입 경로는 <strong>'지인 추천(27%)'</strong>입니다. 이는 커뮤니티의
+                    신뢰도와 로열티가 매우 높음을 반증합니다.</p>
+            </div>
+            <div class="card highlight">
+                <div class="card-title">융합의 시대 (AI + X)</div>
+                <p style="margin:0;">가장 관심 있는 활동으로 <strong>'융합 연구(47.7%)'</strong>가 꼽혔습니다. AI 기술 자체 연구를 넘어, 의료, 예술, 금융 등
+                    자신의 도메인에 AI를 접목하려는 시도가 활발합니다.</p>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <span class="analysis-title">Analyst Note : 고립되지 않으려는 본능</span>
+            <p class="analysis-text">
+                AI가 개인의 업무 생산성을 극대화해줄수록, 역설적으로 <strong>'타인과의 연결'</strong>에 대한 갈증은 커졌습니다. <strong>'융합
+                    연구(47.7%)'</strong>에 대한 높은 관심은, 자신의 도메인 지식(X)에 AI를 결합하여 차별화된 가치를 만들고자 하는 욕구를 반영합니다. 2025년, 커뮤니티는 단순한
+                친목 모임이 아니라, 급변하는 기술 파도 속에서 <strong>'생존과 성장'을 위한 필수적인 베이스캠프</strong>가 되었습니다.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>MODULABS 2025 AI TREND REPORT</span>
+            <span>06</span>
+        </div>
+    </div>
+
+
+    <script>
+        // Common Config
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+        Chart.defaults.color = '#4B5563';
+
+        // 1. Age Chart
+        new Chart(document.getElementById('ageChart'), {
+            type: 'bar',
+            data: {
+                labels: ['20대', '30대', '40대', '50대+'],
+                datasets: [{
+                    label: '응답자 수',
+                    data: [757, 442, 443, 219], // Summarized stats
+                    backgroundColor: ['#A5B4FC', '#6366F1', '#4338CA', '#312E81'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { grid: { display: false } }, y: { display: false } }
+            }
+        });
+
+        // 2. Job Chart
+        new Chart(document.getElementById('jobChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['재직자', '학생', '구직자', '프리랜서'],
+                datasets: [{
+                    data: [56, 16, 15, 10],
+                    backgroundColor: ['#4338CA', '#10B981', '#F59E0B', '#6366F1'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true } } }
+            }
+        });
+
+        // 3. Field Chart
+        new Chart(document.getElementById('fieldChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['IT/SW', '교육', '제조', '금융', '기타'],
+                datasets: [{
+                    data: [56, 10, 9, 5, 20],
+                    backgroundColor: ['#4338CA', '#6366F1', '#818CF8', '#A5B4FC', '#E5E7EB'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true } } }
+            }
+        });
+
+        // 4. Tech Trend Chart (Horizontal)
+        new Chart(document.getElementById('techChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Gen AI / LLM', 'AI Agent', 'NLP', 'Data Eng', 'Vision', 'Ethics', 'MLOps', 'RecSys'],
+                datasets: [{
+                    data: [80.4, 53.0, 19.5, 18.3, 16.3, 15.4, 14.7, 11.5],
+                    backgroundColor: ['#4338CA', '#10B981', '#E5E7EB', '#E5E7EB', '#E5E7EB', '#E5E7EB', '#E5E7EB', '#E5E7EB'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { grid: { display: false } } }
+            }
+        });
+
+        // 5. Freq Chart
+        new Chart(document.getElementById('freqChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['매일', '주 3회+', '기타'],
+                datasets: [{
+                    data: [73, 18, 9],
+                    backgroundColor: ['#4338CA', '#6366F1', '#E5E7EB'],
+                    borderWidth: 0,
+                    cutout: '70%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // 6. Education Needs Chart (NEW DATA)
+        new Chart(document.getElementById('eduChart'), {
+            type: 'bar',
+            data: {
+                labels: ['ChatGPT 활용', '업무 자동화', '데이터 분석', 'AI 코딩/LLM', '콘텐츠 제작'],
+                datasets: [{
+                    label: '응답 수',
+                    data: [656, 537, 495, 471, 342],
+                    backgroundColor: ['#4338CA', '#6366F1', '#818CF8', '#A5B4FC', '#C7D2FE'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { grid: { display: false } } }
+            }
+        });
+
+        // 7. Community Chart
+        new Chart(document.getElementById('communityChart'), {
+            type: 'bar',
+            data: {
+                labels: ['융합 연구 (AI+X)', '기술 연구', '스터디', '오픈소스', '사회문제해결'],
+                datasets: [{
+                    data: [47.7, 45.5, 42.5, 33.2, 32.2],
+                    backgroundColor: ['#F59E0B', '#10B981', '#4338CA', '#6366F1', '#EC4899'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, grid: { color: '#F3F4F6' } }, x: { grid: { display: false } } }
+            }
+        });
+    </script>
+</body>
+
+</html>
